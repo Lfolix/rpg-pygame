@@ -4,6 +4,8 @@ import interface
 
 pygame.init()
 
+#dsadas
+
 player = classes.Player(100)
 bg = classes.Background(player, "images/background.jpg")
 
