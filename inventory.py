@@ -89,15 +89,21 @@ def draw(screen, player):
     mouse = pygame.Rect(int(pygame.mouse.get_pos()[0]), int(pygame.mouse.get_pos()[1]), 10, 10)
 
     for i in player.inventory:
-        if i.rect.collidepoint(mouse_pos):
-            win = pygame.image.load('images/inventory_properties.png')
-            win.blit(pygame.font.Font(None, 20).render(f'{i.title}', True, ('Red')), (48, 10))
-            screen.blit(win, (mouse_pos[0], mouse_pos[1]))  # Отображаем окно, исходя из позиции мыши
-            break  # Если нашли элемент, выходим из цикла (достаточно показывать одно окно)
+        if alive:
+            if i.rect.collidepoint(mouse_pos):
+                win = pygame.image.load('images/inventory_properties.png')
+                win.blit(pygame.font.Font(None, 20).render(f'{i.title}', True, ('Red')), (48, 10))
+                win.blit(pygame.font.Font(None, 20).render(f'Health coins: {i.health_coins}', True, ('Red')), (15, 25))
+                screen.blit(win, (mouse_pos[0], mouse_pos[1]))  # Отображаем окно, исходя из позиции мыши
+                break  # Если нашли элемент, выходим из цикла (достаточно показывать одно окно)
 
         #print("ok")
 
     #finding_item(pygame.mouse)
+
+    if not alive:
+        for i in player.inventory:
+            i.rect.center = (436543763, 346243563)
 
 
 

@@ -25,6 +25,7 @@ class Item:
         self.mouse = pygame.mouse.get_pressed()
         self.mouse_pos = pygame.mouse.get_pos()
         self.title = title
+        self.health_coins = 10
 
     def draw(self, screen, slot):
         self.rect = pygame.Rect(self.slot[0], self.slot[1], 32, 32)
@@ -43,6 +44,11 @@ class Item:
             print(self.player.inventory)
             if self.rect.collidepoint(self.mouse_pos):
                 self.player.inventory.remove(self)
+
+class Food(Item):
+    def __init__(self, image, slot, title, health_coins):
+        super().__init__(image, slot, title)
+        self.health_coins = health_coins
 
 class DropedItem:
     def __init__(self, x, y, image, player):
@@ -79,7 +85,7 @@ class DropedItem:
             self.y = 3465345
             self.rect.center = self.y, self.x
             
-            self.player.inventory.append(Item(self.image_path, None, "Meat"))
+            self.player.inventory.append(Food(self.image_path, None, "Meat", 20))
 
 class Weapon():
     def __init__(self, damage, title, image, slot):
